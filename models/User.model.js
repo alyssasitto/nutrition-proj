@@ -18,6 +18,27 @@ const userSchema = new Schema(
 		confirmPassword: {
 			type: String,
 		},
+		feet: {
+			type: Number,
+
+			default: 0,
+		},
+		inches: {
+			type: Number,
+		},
+		weight: {
+			type: Number,
+		},
+		age: {
+			type: Number,
+		},
+		gender: {
+			type: String,
+		},
+		caloriesNeeded: {
+			type: Number,
+			default: 0,
+		},
 	},
 	{
 		timestamps: true,

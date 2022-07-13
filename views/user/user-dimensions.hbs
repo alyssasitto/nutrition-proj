@@ -1,0 +1,61 @@
+<nav>
+	<img src="/images/logo.png" alt="Vitality logo" class="logo" />
+
+	<div class="menu-container">
+		<div class="logo-container">
+			<img src="images/menu.svg" alt="Menu icon" class="hb" />
+			<img src="images/close.svg" alt="Clost icon" class="close" />
+		</div>
+		<ul class="list-items">
+			<li><a href="/">Home</a></li>
+			<li><a href="/logout">Logout</a></li>
+		</ul>
+	</div>
+</nav>
+
+<form action="/dimensions" method="POST" id="dimensions-form">
+
+	<div>
+		<label for="height">Height:</label>
+		<div>
+			<label for="feet">Feet:</label>
+			<input type="number" name="feet" id="feet" value="{{feet}}" />
+		</div>
+
+		<div>
+			<label for="inches">Inches:</label>
+			<input type="number" name="inches" id="inches" />
+		</div>
+
+	</div>
+
+	<div>
+		<label for="weight">Weight:</label>
+		<input type="number" name="weight" id="weight" />
+	</div>
+
+	<div>
+		<label for="age">Age:</label>
+		<input type="number" name="age" id="number" />
+	</div>
+
+	<div>
+		<label for="gender">Gender:</label>
+
+		<div>
+			<div>
+				<label for="gender">Male</label>
+				<input type="radio" name="gender" value="Male" />
+			</div>
+			<div>
+				<label for="gender">Female</label>
+				<input type="radio" name="gender" value="Female" />
+			</div>
+		</div>
+	</div>
+
+	<button type="submit">Submit</button>
+
+	<p>calories needed: {{user.caloriesNeeded}}</p>
+
+</form>
