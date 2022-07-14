@@ -8,6 +8,8 @@ const User = require("../models/User.model");
 const saltRounds = 10;
 const salt = bcrypt.genSaltSync(saltRounds);
 
+const Day = require("../models/Day.model.js");
+
 // GET ROUTES //
 
 // Sign-up form get route
@@ -27,7 +29,30 @@ router.get("/success", (req, res) => {
 
 // Profile page get route
 router.get("/userProfile", (req, res) => {
-	res.render("user/user-profile.hbs");
+	Day.find({ user: req.session.currentUser._id })
+		.sort({ currentDay: "desc" })
+		.then((dayArr) => {
+			if (dayArr.length === 0) {
+				//display user total calories
+				res.render("user/user-profile.hbs", { user: req.session.currentUser });
+			} else {
+				let dateFromDb = new Date(dayArr[0].currentDay);
+				let todayDate = new Date();
+
+				if (todayDate.toDateString() == dateFromDb.toDateString()) {
+					// display foods from Day object and cal count
+					res.render("user/user-profile.hbs", {
+						user: req.session.currentUser,
+						day: dayArr[0],
+					});
+				} else {
+					//display user total calories
+					res.render("user/user-profile.hbs", {
+						user: req.session.currentUser,
+					});
+				}
+			}
+		});
 });
 
 // Dimensions form get route
@@ -208,9 +233,57 @@ router.get("/search", (req, res) => {
 		)
 		.then((food) => {
 			const searchedFood = food.data.hints[0].food;
+			res.render("user/search-food.hbs", { foodData: food.data.hints });
 			console.log(searchedFood);
 		})
 		.catch((err) => console.log("this is the error ===========>", err));
+});
+
+router.post("/addFood", (req, res) => {
+	const { foodName, calories } = req.body;
+
+	const foodObj = {
+		foodName,
+		calories,
+	};
+
+	Day.find({ user: req.session.currentUser._id })
+		.sort({ currentDay: "desc" })
+		.then((dayArr) => {
+			console.log(dayArr, foodName, calories);
+			if (dayArr.length === 0) {
+				return Day.create({
+					user: req.session.currentUser._id,
+					foodArray: [foodObj],
+					daysCalories:
+						req.session.currentUser.caloriesNeeded - Number(foodObj.calories),
+					currentDay: new Date().toDateString(),
+				});
+			} else {
+				let dateFromDb = new Date(dayArr[0].currentDay);
+				let todayDate = new Date();
+
+				//if today's date matches the date of the Day model from the database, do not create a new Day. Instead, push food to existing Day Model.
+				if (todayDate.toDateString() == dateFromDb.toDateString()) {
+					let existingDay = dayArr[0];
+					existingDay.foodArray.push(foodObj);
+					existingDay.daysCalories -= Number(foodObj.calories);
+					return existingDay.save();
+				} else {
+					return Day.create({
+						user: req.session.currentUser._id,
+						foodArray: [foodObj],
+						daysCalories:
+							req.session.currentUser.caloriesNeeded - Number(foodObj.calories),
+						currentDay: new Date().toDateString(),
+					});
+				}
+			}
+		})
+		.then((savedDay) => {
+			console.log("saved day", savedDay);
+			res.redirect("/userProfile");
+		});
 });
 
 module.exports = router;

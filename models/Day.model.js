@@ -2,13 +2,19 @@ const { Schema, model } = require("mongoose");
 
 const daySchema = new Schema({
 	user: {
-		type: ObjectId,
+		type: Schema.Types.ObjectId,
 	},
-	foodArray: {
-		type: Array,
-	},
+	foodArray: [
+		{
+			foodName: String,
+			calories: Number,
+		},
+	],
 	daysCalories: {
 		type: Number,
+	},
+	currentDay: {
+		type: Date,
 	},
 });
 

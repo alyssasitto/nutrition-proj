@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="stylesheets/search-food.css" />
+
+<nav>
+	<img src="/images/logo.png" alt="Vitality logo" class="logo" />
+
+	<div class="menu-container">
+		<div class="logo-container">
+			<img src="images/menu.svg" alt="Menu icon" class="hb" />
+			<img src="images/close.svg" alt="Clost icon" class="close" />
+		</div>
+		<ul class="list-items">
+			<li><a href="/">Home</a></li>
+			<li><a href="/logout">Logout</a></li>
+		</ul>
+	</div>
+</nav>
+
+{{#each foodData}}
+	<form action="/addFood" method="POST">
+		<h4>{{this.food.label}}</h4>
+		<p>CALS: {{this.food.nutrients.ENERC_KCAL}}</p>
+		<input
+			type="text"
+			value="{{this.food.label}}"
+			name="foodName"
+			class="hide"
+		/>
+		<input
+			type="text"
+			value="{{this.food.nutrients.ENERC_KCAL}}"
+			name="calories"
+			class="hide"
+		/>
+
+		<button type="submit">Add food</button>
+
+	</form>
+{{/each}}
