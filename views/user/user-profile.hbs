@@ -33,11 +33,11 @@
 	<h3>Foods Logged:</h3>
 	{{#if day}}
 		{{#each day.foodArray}}
-			<div>
+			<form action="/delete" method="POST">
 				<p>{{this.foodName}}</p>
 				<p>{{this.calories}}</p>
-				<button>Delete</button>
-			</div>
+				<button type="submit">Delete</button>
+			</form>
 		{{/each}}
 	{{/if}}
 

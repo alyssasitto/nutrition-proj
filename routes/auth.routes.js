@@ -102,6 +102,7 @@ router.post("/signup", (req, res, next) => {
 			})
 			.then((newUser) => {
 				console.log("this is the new user: ", newUser);
+				req.session.currentUser = newUser;
 				res.redirect("/success");
 			})
 			.catch((err) => console.log(err));
@@ -284,6 +285,12 @@ router.post("/addFood", (req, res) => {
 			console.log("saved day", savedDay);
 			res.redirect("/userProfile");
 		});
+});
+
+router.post("/delete", (req, res) => {
+	Day.find({ user: req.session.currentUser._id }).then((day) =>
+		console.log("this is the food arr ====>", day)
+	);
 });
 
 module.exports = router;
