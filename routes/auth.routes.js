@@ -139,14 +139,13 @@ router.post("/login", (req, res) => {
 		} else if (bcrypt.compareSync(password, user.password)) {
 			req.session.currentUser = user;
 			if (
-				req.session.currentUser.height === undefined ||
+				req.session.currentUser.feet === undefined ||
 				req.session.currentUser.inches === undefined ||
 				req.session.currentUser.weight === undefined ||
 				req.session.currentUser.age === undefined
 			) {
 				res.redirect("/dimensions");
 			} else {
-				console.log("cals --------", req.session.currentUser.caloriesNeeded);
 				res.render("user/user-profile.hbs", { user: req.session.currentUser });
 			}
 		} else {
@@ -191,5 +190,27 @@ function femaleCals(currentUser) {
 
 	return BMR.toFixed();
 }
+
+const params = {
+	key: "d882f0b5a9ca8ed230eda578af74b7fe",
+	id: "7249a62c",
+};
+
+const axios = require("axios");
+
+router.get("/search", (req, res) => {
+	const foodItem = req.query.ingr;
+	console.log(foodItem);
+
+	axios
+		.get(
+			`https://api.edamam.com/api/food-database/v2/parser?app_id=7249a62c&app_key=d882f0b5a9ca8ed230eda578af74b7fe&ingr=${foodItem}`
+		)
+		.then((food) => {
+			const searchedFood = food.data.hints[0].food;
+			console.log(searchedFood);
+		})
+		.catch((err) => console.log("this is the error ===========>", err));
+});
 
 module.exports = router;

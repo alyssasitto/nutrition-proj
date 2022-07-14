@@ -11,8 +11,10 @@ html {
 }
 
 body {
-	background-color: #f9f0da;
+	padding: 0 0 2rem;
+	background-color: #f9f1e2;
 	font-size: 2.5rem;
+	font-family: "Poppins", serif;
 }
 
 .overlay {
@@ -42,7 +44,7 @@ nav {
 	background-color: white;
 	top: 0;
 	right: 0;
-	left: 20rem;
+	left: 15rem;
 	height: 100%;
 	padding-top: 5rem;
 	/* z-index: -1; */
@@ -50,6 +52,15 @@ nav {
 
 a {
 	text-decoration: none;
+}
+
+li a {
+	color: #575a49;
+	font-weight: 500;
+	font-size: 2.7rem;
+	text-align: left;
+	margin-left: 2rem;
+	font-size: 3rem;
 }
 
 .logo-container {
@@ -72,4 +83,8 @@ a {
 
 .show {
 	display: block;
+}
+
+.error {
+	color: red;
 }

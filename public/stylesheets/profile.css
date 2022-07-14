@@ -1,0 +1,46 @@
+.content {
+	text-align: center;
+}
+
+h3 span {
+	font-weight: 500;
+}
+
+form {
+	display: flex;
+	justify-content: center;
+}
+
+form button {
+	padding: 0 0.5rem;
+}
+
+input {
+	padding: 1rem 8rem 1rem 1rem;
+	border: none;
+}
+
+.food-list {
+	height: 10rem;
+	overflow: scroll;
+	border: 2px solid black;
+	margin: 2rem 1rem 0;
+	padding: 0 1rem;
+}
+
+.food-list div {
+	border-bottom: 1px solid black;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.foods {
+	padding: 0 1rem;
+}
+
+.foods div {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
