@@ -41,6 +41,7 @@ router.get("/userProfile", (req, res) => {
 
 				if (todayDate.toDateString() == dateFromDb.toDateString()) {
 					// display foods from Day object and cal count
+					console.log(req.session.currentUser, dayArr[0]);
 					res.render("user/user-profile.hbs", {
 						user: req.session.currentUser,
 						day: dayArr[0],
@@ -127,6 +128,7 @@ router.post("/dimensions", (req, res) => {
 			updatedUser
 				.save()
 				.then((savedUser) => {
+					req.session.currentUser = savedUser;
 					res.render("user/user-profile", { user: savedUser });
 					console.log(savedUser);
 				})
@@ -139,6 +141,7 @@ router.post("/dimensions", (req, res) => {
 			updatedUser
 				.save()
 				.then((savedUser) => {
+					req.session.currentUser = savedUser;
 					res.render("user/user-profile", { user: savedUser });
 					console.log(savedUser);
 				})
@@ -297,16 +300,16 @@ router.post("/delete/:foodId", (req, res) => {
 				if (day.foodArray[i]._id == String(foodId)) {
 					foodChosen = i;
 
-					user.caloriesNeeded += day.foodArray[i].calories;
+					//user.caloriesNeeded += day.foodArray[i].calories;
 
-					day.daysCalories -= day.foodArray[i].calories;
+					day.daysCalories = day.daysCalories + day.foodArray[i].calories;
 
 					console.log(user.caloriesNeeded);
 					console.log(day.foodArray[i]);
 
 					day.foodArray.splice(foodChosen, 1);
 
-					day.save();
+					return day.save();
 
 					// console.log("THIS IS THE INDEX ======>", i);
 					// console.log("this is the chosen food =======>", foodChosen);
@@ -314,7 +317,9 @@ router.post("/delete/:foodId", (req, res) => {
 					// console.log("DELETED ITEM =====>", deletedItem);
 				}
 			}
-
+		})
+		.then((savedDay) => {
+			console.log("removed food from day", savedDay);
 			res.redirect("/userProfile");
 		})
 		.catch((err) => console.log(err));
