@@ -1,0 +1,33 @@
+nav {
+	margin-bottom: 2rem;
+}
+
+form {
+	padding: 0 3rem;
+	display: flex;
+	flex-direction: column;
+	gap: 3rem;
+}
+
+.container .box {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+	flex-direction: column;
+}
+
+input {
+	padding: 1.5rem;
+	border: none;
+	font-size: 2rem;
+}
+
+button {
+	align-self: center;
+	background-color: #dae2b6;
+	padding: 1.3rem 5rem;
+	border-radius: 6px;
+	font-size: 2.8rem;
+	border: none;
+	margin-top: 1rem;
+}

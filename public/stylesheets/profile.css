@@ -20,6 +20,11 @@ input {
 	border: none;
 }
 
+.goal,
+.cals-remaining {
+	margin-bottom: 2rem;
+}
+
 .food-list {
 	height: 10rem;
 	overflow: scroll;
@@ -39,8 +44,46 @@ input {
 	padding: 0 1rem;
 }
 
+.foods h3 {
+	margin: 2rem 0;
+	text-align: center;
+}
+
 .foods div {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+
+.food-name {
+	font-weight: bold;
+}
+
+.delete-form {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 3rem;
+}
+
+.delete-form div {
+	display: flex;
+	gap: 2rem;
+}
+
+.search-btn {
+	background-color: #dae2b6;
+	border-radius: 7px;
+	border: none;
+	font-size: 2rem;
+	font-weight: 600;
+}
+
+.delete {
+	background-color: rgb(255, 132, 132);
+	font-size: 2rem;
+	border: none;
+	padding: 0.5rem;
+	border-radius: 7px;
+	font-weight: 600;
 }

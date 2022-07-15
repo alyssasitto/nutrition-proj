@@ -1,3 +1,5 @@
+<link rel="stylesheet" href="stylesheets/dimensions.css" />
+
 <nav>
 	<img src="/images/logo.png" alt="Vitality logo" class="logo" />
 
@@ -15,34 +17,35 @@
 
 <form action="/dimensions" method="POST" id="dimensions-form">
 
-	<div>
-		<label for="height">Height:</label>
-		<div>
+	<div class="container">
+
+		<div class="box">
 			<label for="feet">Feet:</label>
-			<input type="number" name="feet" id="feet" value="{{feet}}" />
+			<input
+				type="number"
+				name="feet"
+				id="feet"
+				value="{{feet}}"
+				placeholder="Feet"
+			/>
 		</div>
 
-		<div>
+		<div class="box">
 			<label for="inches">Inches:</label>
-			<input type="number" name="inches" id="inches" />
+			<input type="number" name="inches" id="inches" placeholder="Inches" />
 		</div>
 
-	</div>
+		<div class="box">
+			<label for="weight">Weight:</label>
+			<input type="number" name="weight" id="weight" placeholder="Weight" />
+		</div>
 
-	<div>
-		<label for="weight">Weight:</label>
-		<input type="number" name="weight" id="weight" />
-	</div>
+		<div class="box">
+			<label for="age">Age:</label>
+			<input type="number" name="age" id="number" placeholder="Age" />
+		</div>
 
-	<div>
-		<label for="age">Age:</label>
-		<input type="number" name="age" id="number" />
-	</div>
-
-	<div>
-		<label for="gender">Gender:</label>
-
-		<div>
+		<div class="gender">
 			<div>
 				<label for="gender">Male</label>
 				<input type="radio" name="gender" value="Male" />
@@ -55,7 +58,5 @@
 	</div>
 
 	<button type="submit">Submit</button>
-
-	<p>calories needed: {{user.caloriesNeeded}}</p>
 
 </form>

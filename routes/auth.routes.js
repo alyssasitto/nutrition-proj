@@ -287,10 +287,37 @@ router.post("/addFood", (req, res) => {
 		});
 });
 
-router.post("/delete", (req, res) => {
-	Day.find({ user: req.session.currentUser._id }).then((day) =>
-		console.log("this is the food arr ====>", day)
-	);
+router.post("/delete/:foodId", (req, res) => {
+	const user = req.session.currentUser;
+	const foodId = req.params.foodId;
+	Day.findOne({ "foodArray._id": foodId })
+		.then((day) => {
+			let foodChosen;
+			for (let i = 0; i < day.foodArray.length; i++) {
+				if (day.foodArray[i]._id == String(foodId)) {
+					foodChosen = i;
+
+					user.caloriesNeeded += day.foodArray[i].calories;
+
+					day.daysCalories -= day.foodArray[i].calories;
+
+					console.log(user.caloriesNeeded);
+					console.log(day.foodArray[i]);
+
+					day.foodArray.splice(foodChosen, 1);
+
+					day.save();
+
+					// console.log("THIS IS THE INDEX ======>", i);
+					// console.log("this is the chosen food =======>", foodChosen);
+					// const deletedItem = day.foodArray.splice(foodChosen, 1);
+					// console.log("DELETED ITEM =====>", deletedItem);
+				}
+			}
+
+			res.redirect("/userProfile");
+		})
+		.catch((err) => console.log(err));
 });
 
 module.exports = router;

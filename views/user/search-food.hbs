@@ -17,20 +17,22 @@
 
 {{#each foodData}}
 	<form action="/addFood" method="POST">
-		<h4>{{this.food.label}}</h4>
-		<p>CALS: {{this.food.nutrients.ENERC_KCAL}}</p>
-		<input
-			type="text"
-			value="{{this.food.label}}"
-			name="foodName"
-			class="hide"
-		/>
-		<input
-			type="text"
-			value="{{this.food.nutrients.ENERC_KCAL}}"
-			name="calories"
-			class="hide"
-		/>
+		<div>
+			<h4>{{this.food.label}}</h4>
+			<p>CALS: {{this.food.nutrients.ENERC_KCAL}}</p>
+			<input
+				type="text"
+				value="{{this.food.label}}"
+				name="foodName"
+				class="hide"
+			/>
+			<input
+				type="text"
+				value="{{this.food.nutrients.ENERC_KCAL}}"
+				name="calories"
+				class="hide"
+			/>
+		</div>
 
 		<button type="submit">Add food</button>
 

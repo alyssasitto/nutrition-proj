@@ -16,14 +16,16 @@
 </nav>
 
 <div class="content">
-	<h3><span>Allowable Calories:</span> {{user.caloriesNeeded}} cals</h3>
+	<h3 class="goal"><span>Goal:</span> {{user.caloriesNeeded}} cals</h3>
 	{{#if day}}
-		<h3><span>Calories Remaining:</span> {{day.daysCalories}} cals</h3>
+		<h3 class="cals-remaining"><span>Calories Remaining:</span>
+			{{day.daysCalories}}
+			cals</h3>
 	{{/if}}
 	<form action="/search" method="GET">
 
 		<input type="text" name="ingr" id="search-item" />
-		<button type="submit">Search</button>
+		<button type="submit" class="search-btn">Search</button>
 
 	</form>
 
@@ -33,10 +35,12 @@
 	<h3>Foods Logged:</h3>
 	{{#if day}}
 		{{#each day.foodArray}}
-			<form action="/delete" method="POST">
-				<p>{{this.foodName}}</p>
-				<p>{{this.calories}}</p>
-				<button type="submit">Delete</button>
+			<form action="/delete/{{this._id}}" method="post" class="delete-form">
+				<div>
+					<p class="food-name">{{this.foodName}}</p>
+					<p class="calories">Cals: {{this.calories}}</p>
+				</div>
+				<button type="submit" class="delete">Delete</button>
 			</form>
 		{{/each}}
 	{{/if}}
