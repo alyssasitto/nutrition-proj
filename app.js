@@ -15,6 +15,10 @@ const hbs = require("hbs");
 
 const app = express();
 
+if (process.env.NODE_ENV === "production") {
+	app.use(enforce.HTTPS({ trustProtoHeader: true }));
+}
+
 // Handles the session
 require("./config/session.config")(app);
 
