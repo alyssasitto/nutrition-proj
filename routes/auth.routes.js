@@ -58,6 +58,7 @@ router.get("/userProfile", (req, res) => {
 
 // Dimensions form get route
 router.get("/dimensions", (req, res) => {
+	console.log(req.session);
 	User.findById(req.session.currentUser._id).then((user) => {
 		console.log(user);
 		res.render("user/user-dimensions.hbs", { user });
