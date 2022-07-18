@@ -167,6 +167,7 @@ router.post("/login", (req, res) => {
 			return;
 		} else if (bcrypt.compareSync(password, user.password)) {
 			req.session.currentUser = user;
+			console.log(req.session);
 			if (
 				req.session.currentUser.feet === undefined ||
 				req.session.currentUser.inches === undefined ||
