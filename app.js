@@ -5,6 +5,8 @@ require("dotenv/config");
 // ℹ️ Connects to the database
 require("./db");
 
+//force ssl because heroku breaks our site without it (no auto redirecting) because session cookies are set to secure=true in production
+const enforce = require("express-sslify");
 // Handles http requests (express is node js framework)
 // https://www.npmjs.com/package/express
 const express = require("express");
