@@ -34,36 +34,11 @@ a {
 }
 
 @media screen and (min-width: 1200px) {
-	nav {
-		padding: 2rem 3rem;
-		margin-bottom: 4rem;
-	}
 	.content-container {
 		display: flex;
 		padding: 0 10rem;
 		gap: 5rem;
-	}
-
-	.hero {
-		width: 30rem;
-	}
-
-	.logo-container {
-		display: none;
-	}
-
-	.list-items {
-		display: block;
-		position: relative;
-		left: 0rem;
-		padding-top: 0;
-		background-color: transparent;
-		display: flex;
-		gap: 1rem;
-	}
-
-	.logo {
-		height: 4.5rem;
+		margin-top: 6rem;
 	}
 
 	.hero {
